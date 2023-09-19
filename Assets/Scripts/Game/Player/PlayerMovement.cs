@@ -33,7 +33,7 @@ public class PlayerMovement : MonoBehaviour
     { //frequency of the phy6 system
 
         SetPlayerVelocity();
-        RotationInDirectionOfInput();
+        // RotationInDirectionOfInput();
     }
 
     private void SetPlayerVelocity()
