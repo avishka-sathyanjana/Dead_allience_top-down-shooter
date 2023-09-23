@@ -15,6 +15,8 @@ GameObject:
   - component: {fileID: 6194622399818541066}
   - component: {fileID: 8076254344784002578}
   - component: {fileID: 2066693507018528762}
+  - component: {fileID: 8185051038519391730}
+  - component: {fileID: 8521057722506704508}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -127,7 +129,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.72
+  m_Radius: 0.81
 --- !u!114 &8076254344784002578
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -162,6 +164,89 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &8185051038519391730
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7286964745365801840}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39b92ec38ba0ace4d902b59ad7eadc9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _currentHealth: 10
+  _maximumHealth: 10
+  OnDied:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2066693507018528762}
+        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
+        m_MethodName: SetTrigger
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: OnDied
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 6194622399818541066}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: OnDied
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 4466399631832334393}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: OnDied
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 8521057722506704508}
+        m_TargetAssemblyTypeName: EnemyDestroyContrroller, Assembly-CSharp
+        m_MethodName: DestroyEnemy
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 1
+          m_StringArgument: OnDied
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnDamaged:
+    m_PersistentCalls:
+      m_Calls: []
+  OnHealthChanged:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &8521057722506704508
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7286964745365801840}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22a0678e7266c3747a60a58ccedb8717, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8464757074495410600
 GameObject:
   m_ObjectHideFlags: 0

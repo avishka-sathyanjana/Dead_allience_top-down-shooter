@@ -14,6 +14,7 @@ public class EnemySpawner : MonoBehaviour
     private float _maximumSpawnTime;
 
     private float _timeUntilSpawn;
+    private bool isSpawning = true;
 
     void Awake()
     {
@@ -22,17 +23,25 @@ public class EnemySpawner : MonoBehaviour
 
     void Update()
     {
-        _timeUntilSpawn -= Time.deltaTime; //updating time to make the next spawn
-
-        if (_timeUntilSpawn <= 0)
+        if (isSpawning)
         {
-            Instantiate(_enemyPrefab, transform.position, Quaternion.identity); //create enemy
-            SetTimeUntilSpawn();
+            _timeUntilSpawn -= Time.deltaTime; //updating time to make the next spawn
+
+            if (_timeUntilSpawn <= 0)
+            {
+                Instantiate(_enemyPrefab, transform.position, Quaternion.identity); //create enemy
+                SetTimeUntilSpawn();
+            }
         }
     }
 
     private void SetTimeUntilSpawn()
     {
         _timeUntilSpawn = Random.Range(_minimumSpawnTime, _maximumSpawnTime); //a random value between minim and mx
+    }
+
+    public void StopSpawning()  //to stop spawning when the game is over
+    {
+        isSpawning = false;
     }
 }
