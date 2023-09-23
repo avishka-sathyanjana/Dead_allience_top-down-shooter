@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
 public class Level_Manager : MonoBehaviour
@@ -17,6 +18,14 @@ public class Level_Manager : MonoBehaviour
     public int score;
 
     public SaveData data;
+
+    public TextMeshProUGUI pointText;
+
+    void Update()
+    {
+        //Debug.Log("Points: " + score.ToString());
+        pointText.text = "Points: " + score.ToString();
+    }
 
     private void Awake() {
         manager = this;
@@ -58,7 +67,7 @@ public class Level_Manager : MonoBehaviour
     public void IncreaseScore(int amount){
         score += amount;
         //show score in console
-        Debug.Log("Score: " + score.ToString());
+        // Debug.Log("Score: " + score.ToString());
     }
 }
 

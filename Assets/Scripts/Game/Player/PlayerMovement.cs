@@ -21,6 +21,8 @@ public class PlayerMovement : MonoBehaviour
     private Camera _camera;
     private Animator _animator;
 
+    public KeyManager km;
+
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
@@ -85,5 +87,15 @@ public class PlayerMovement : MonoBehaviour
     private void OnMove(InputValue inputValue)
     {
         _movementInput = inputValue.Get<Vector2>();
+    }
+
+    void OnTriggerEnter2D(Collider2D other) {
+        if(other.gameObject.CompareTag("Key"))
+        {   
+            // Debug.Log("Key Collected");
+            Destroy(other.gameObject);
+            km.keyCount++;
+            
+        }
     }
 }

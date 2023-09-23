@@ -23,6 +23,12 @@ public class Bullet : MonoBehaviour
             healthController.TakeDamage(10);//destroy enemy
             Destroy(gameObject); //destroy bullet
         }
+
+        // //if collision happening to a wall
+        // if (collision.GetComponent<Wall>())
+        // {
+        //     Destroy(gameObject); //destroy bullet
+        // }
     }
 
      private void DestroyWhenOffScreen()
