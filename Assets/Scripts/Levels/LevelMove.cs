@@ -6,19 +6,25 @@ using UnityEngine.SceneManagement;
 public class LevelMove : MonoBehaviour
 {
     public int sceneBuildIndex;
+    public KeyManager km;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "Player")
         {   
-            //print in the colcole that the player has entered the door
-            // Debug.Log("Player has entered the door");
+            Debug.Log("Player has entered the door");
+            //dispaly the key count in console
+            Debug.Log("Key Count: " + km.keyCount);
             // SceneManager.LoadScene(sceneBuildIndex);
-
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1, LoadSceneMode.Single);
+            if(km.keyCount >= 3 ){
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1, LoadSceneMode.Single);
+            }
+           
+           
+        //    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1, LoadSceneMode.Single);
 
             //set is trigger false
-            GetComponent<Collider2D>().isTrigger = false;                
+            // GetComponent<Collider2D>().isTrigger = false;                
         }
     }
 }

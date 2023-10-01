@@ -23,11 +23,30 @@ public class PlayerMovement : MonoBehaviour
 
     public KeyManager km;
 
+    [SerializeField]
+    private AudioClip _leftFootstepSound; // Left footstep sound clip
+    [SerializeField]
+    private AudioClip _rightFootstepSound; // Right footstep sound clip
+    private AudioSource _footstepAudioSource;
+
+    public AudioClip keyCollectSound;
+
+    private AudioSource _audioSource;
+
+    private void Start()
+    {
+        _audioSource = GetComponent<AudioSource>();
+    }
+
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
         _camera = Camera.main;      //get the main camera
         _animator = GetComponent<Animator>();
+
+        // Initialize footstep audio source
+        _footstepAudioSource = gameObject.AddComponent<AudioSource>();
+        _footstepAudioSource.spatialBlend = 1f; // 3D audio
     }
 
     private void FixedUpdate()
@@ -52,6 +71,12 @@ public class PlayerMovement : MonoBehaviour
                     0.1f);
 
         _rigidbody.velocity = _smoothedMovementInput * _speed;
+
+        // Play footstep sounds if moving
+        if (_rigidbody.velocity.magnitude > 0.1f && !_footstepAudioSource.isPlaying)
+        {
+            PlayRandomFootstepSound();
+        }
 
         PreventPlayerGoingOffScreen();
     }
@@ -89,13 +114,25 @@ public class PlayerMovement : MonoBehaviour
         _movementInput = inputValue.Get<Vector2>();
     }
 
-    void OnTriggerEnter2D(Collider2D other) {
-        if(other.gameObject.CompareTag("Key"))
-        {   
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Key"))
+        {
+            // Play the key collection sound
+            if (keyCollectSound != null && _audioSource != null)
+            {
+                _audioSource.PlayOneShot(keyCollectSound);
+            }
             // Debug.Log("Key Collected");
             Destroy(other.gameObject);
             km.keyCount++;
-            
+
         }
+    }
+
+    private void PlayRandomFootstepSound()
+    {
+        AudioClip footstepSound = Random.Range(0f, 1f) < 0.5f ? _leftFootstepSound : _rightFootstepSound;
+        _footstepAudioSource.PlayOneShot(footstepSound);
     }
 }

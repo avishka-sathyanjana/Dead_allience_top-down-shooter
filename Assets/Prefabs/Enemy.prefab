@@ -129,7 +129,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.81
+  m_Radius: 0.67
 --- !u!114 &8076254344784002578
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -143,6 +143,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _damageAmount: 10
+  _attackAudioClips: []
 --- !u!95 &2066693507018528762
 Animator:
   serializedVersion: 5
@@ -178,6 +179,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _currentHealth: 10
   _maximumHealth: 10
+  deathSound: {fileID: 8300000, guid: 7f1c45c7d80a6e14687189532c7ba9ef, type: 3}
   OnDied:
     m_PersistentCalls:
       m_Calls:

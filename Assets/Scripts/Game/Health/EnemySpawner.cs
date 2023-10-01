@@ -16,6 +16,10 @@ public class EnemySpawner : MonoBehaviour
     private float _timeUntilSpawn;
     private bool isSpawning = true;
 
+    [SerializeField]
+    private AudioClip[] _spawnAudioClips; // Array of audio clips for spawning sounds
+
+
     void Awake()
     {
         SetTimeUntilSpawn();
@@ -30,6 +34,14 @@ public class EnemySpawner : MonoBehaviour
             if (_timeUntilSpawn <= 0)
             {
                 Instantiate(_enemyPrefab, transform.position, Quaternion.identity); //create enemy
+                                                                                    // Randomly select an audio clip for spawning sound
+                if (_spawnAudioClips.Length > 0)
+                {
+                    AudioClip randomSpawnClip = _spawnAudioClips[Random.Range(0, _spawnAudioClips.Length)];
+                    AudioSource.PlayClipAtPoint(randomSpawnClip, transform.position);
+                }
+
+
                 SetTimeUntilSpawn();
             }
         }

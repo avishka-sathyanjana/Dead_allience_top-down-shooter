@@ -11,6 +11,9 @@ public class HealthController : MonoBehaviour
     [SerializeField]
     private float _maximumHealth;
 
+    private AudioSource _audioSource;
+    public AudioClip deathSound;
+
     public float RemainingHealthPercentage //to get the remaining ealth
     {
         get
@@ -19,12 +22,12 @@ public class HealthController : MonoBehaviour
         }
     }
 
-//not to take damege in short period of time
-    public bool IsInvincible 
+    //not to take damege in short period of time
+    public bool IsInvincible
     {
-         get; 
-         set; 
-         
+        get;
+        set;
+
     }
 
     public UnityEvent OnDied;
@@ -32,6 +35,11 @@ public class HealthController : MonoBehaviour
     public UnityEvent OnDamaged;
 
     public UnityEvent OnHealthChanged;
+
+     private void Awake()
+    {
+        _audioSource = GetComponent<AudioSource>(); //get AudioSource component
+    }
 
     public void TakeDamage(float damageAmount)
     {
@@ -55,6 +63,10 @@ public class HealthController : MonoBehaviour
 
         if (_currentHealth == 0)
         {
+
+           if(deathSound != null && _audioSource != null){
+                _audioSource.PlayOneShot(deathSound);
+           }
             OnDied.Invoke();  //this event will fire and tell all its subscribers that the object has died
         }
         else
